@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate": "npm run generate-db",
+    "generate-db": "supabase gen types typescript --project-id vmxnwpwidjjhtddaibqm > supabase/generated.types.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -73,6 +75,7 @@
     "globals": "^15.15.0",
     "postcss": "^8.5.6",
     "prettier": "3.7.4",
+    "supabase": "^2.65.6",
     "tailwindcss": "^3.4.18",
     "typescript": "^5",
     "typescript-eslint": "^8.38.0"

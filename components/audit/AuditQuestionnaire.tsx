@@ -9,6 +9,7 @@ import {
 } from "./QuestionnaireData";
 import { useRouter } from "next/navigation";
 import supabase from "@/supabase/client";
+import { AuditSubmission } from "@/supabase/types";
 
 interface AuditQuestionnaireProps {
   onComplete: (submissionId: string) => void;
@@ -242,7 +243,7 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
 
     try {
       // Prepare data for submission
-      const submissionData = {
+      const submissionData: AuditSubmission = {
         name: name.trim(),
         email,
         marketing_consent: consentMarketing,
@@ -289,6 +290,9 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
         spiral_breakers: answers.spiral_breakers || [],
         critical_accounts: answers.critical_accounts || null,
         account_breach_suspicion: answers.account_breach_suspicion || null,
+        created_at: new Date().toISOString(),
+        generated_report: null,
+        report_generated_at: null,
       };
 
       // Insert to database
