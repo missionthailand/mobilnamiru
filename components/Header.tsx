@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {useRouter} from "next/navigation";
+import {usePathname} from "next/navigation";
 import Link from "next/link";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +18,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isHome = router.pathname === "/";
+  const isHome = pathname === "/";
 
   const scrollToSection = (id: string) => {
     if (!isHome) {
