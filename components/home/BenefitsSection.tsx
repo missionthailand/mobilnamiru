@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { CheckIcon } from "@/components/icons/Icons";
@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 const benefits = [
   {
     title: "Méně rušení, víc soustředění",
-    description: "Notifikace budou chodit jen od toho, co je opravdu důležité. Zbytek počká.",
+    description:
+      "Notifikace budou chodit jen od toho, co je opravdu důležité. Zbytek počká.",
     details: {
       timeSaved: "45-90 min/den",
       howItWorks: [
@@ -17,12 +18,14 @@ const benefits = [
         "Skupinové notifikace místo každé zvlášť",
         "Tichý režim pro sociální sítě",
       ],
-      impact: "Průměrný člověk zkontroluje telefon 96× denně. S Focus režimy to klesne na 20-30×.",
+      impact:
+        "Průměrný člověk zkontroluje telefon 96× denně. S Focus režimy to klesne na 20-30×.",
     },
   },
   {
     title: "Jistota, že máš zálohy",
-    description: "Fotky, kontakty, zprávy – vše bezpečně zálohované. Bez stresu, že něco ztratíš.",
+    description:
+      "Fotky, kontakty, zprávy – vše bezpečně zálohované. Bez stresu, že něco ztratíš.",
     details: {
       timeSaved: "∞ (nevyčíslitelné)",
       howItWorks: [
@@ -31,12 +34,14 @@ const benefits = [
         "Nastavení optimalizace úložiště",
         "Záloha WhatsApp a dalších chatů",
       ],
-      impact: "80% lidí nikdy nekontrolovalo, jestli jim záloha funguje. Zjistí to až když je pozdě.",
+      impact:
+        "80% lidí nikdy nekontrolovalo, jestli jim záloha funguje. Zjistí to až když je pozdě.",
     },
   },
   {
     title: "Bezpečí pro celou rodinu",
-    description: "Ochrana účtů, rodičovská kontrola, sdílení polohy s blízkými – klidnější spánek.",
+    description:
+      "Ochrana účtů, rodičovská kontrola, sdílení polohy s blízkými – klidnější spánek.",
     details: {
       timeSaved: "Klid mysli 24/7",
       howItWorks: [
@@ -45,12 +50,14 @@ const benefits = [
         "Sdílení polohy s partnerem/rodinou",
         "Kontrola bezpečnosti hesel",
       ],
-      impact: "43% lidí používá stejné heslo všude. Jeden únik = přístup ke všemu.",
+      impact:
+        "43% lidí používá stejné heslo všude. Jeden únik = přístup ke všemu.",
     },
   },
   {
     title: "Čas navíc každý den",
-    description: "Automatizace a zkratky udělají rutinní úkoly za tebe. Ty máš čas na důležité věci.",
+    description:
+      "Automatizace a zkratky udělají rutinní úkoly za tebe. Ty máš čas na důležité věci.",
     details: {
       timeSaved: "30-60 min/den",
       howItWorks: [
@@ -59,12 +66,14 @@ const benefits = [
         "Rychlé přepínání mezi režimy",
         "Hlasové ovládání pro běžné úkoly",
       ],
-      impact: "5 kliknutí denně × 365 dní = 1825 zbytečných kliknutí ročně. Automatizace to dělá za tebe.",
+      impact:
+        "5 kliknutí denně × 365 dní = 1825 zbytečných kliknutí ročně. Automatizace to dělá za tebe.",
     },
   },
   {
     title: "Telefon jako nástroj, ne závislost",
-    description: "Screen Time a Focus režimy nastavené tak, abys telefon používal/a vědomě.",
+    description:
+      "Screen Time a Focus režimy nastavené tak, abys telefon používal/a vědomě.",
     details: {
       timeSaved: "2-4 hodiny/den",
       howItWorks: [
@@ -73,12 +82,14 @@ const benefits = [
         "Černobílý režim večer",
         "Blokování nekonečného scrollování",
       ],
-      impact: "Průměrný Čech tráví na telefonu 4,5 hodiny denně. 70% z toho je zbytečné scrollování.",
+      impact:
+        "Průměrný Čech tráví na telefonu 4,5 hodiny denně. 70% z toho je zbytečné scrollování.",
     },
   },
   {
     title: "Know-how, které ti zůstane",
-    description: "Nejenom nastavíme – vysvětlíme proč a jak. Příště si poradíš sám/sama.",
+    description:
+      "Nejenom nastavíme – vysvětlíme proč a jak. Příště si poradíš sám/sama.",
     details: {
       timeSaved: "Navždy",
       howItWorks: [
@@ -125,7 +136,7 @@ const BenefitsSection = () => {
                 className={cn(
                   "glass rounded-2xl p-6 transition-all duration-300 cursor-pointer group",
                   "hover:border-primary/30",
-                  isExpanded && "border-primary/50 shadow-lg shadow-primary/10"
+                  isExpanded && "border-primary/50 shadow-lg shadow-primary/10",
                 )}
               >
                 <div className="flex items-start gap-4">
@@ -147,7 +158,7 @@ const BenefitsSection = () => {
                   <ChevronDown
                     className={cn(
                       "w-5 h-5 text-muted-foreground transition-transform duration-300",
-                      isExpanded && "rotate-180"
+                      isExpanded && "rotate-180",
                     )}
                   />
                 </div>
@@ -156,7 +167,9 @@ const BenefitsSection = () => {
                 <div
                   className={cn(
                     "overflow-hidden transition-all duration-500",
-                    isExpanded ? "max-h-[500px] opacity-100 mt-4" : "max-h-0 opacity-0"
+                    isExpanded
+                      ? "max-h-[500px] opacity-100 mt-4"
+                      : "max-h-0 opacity-0",
                   )}
                 >
                   <div className="border-t border-border/50 pt-4 space-y-4">

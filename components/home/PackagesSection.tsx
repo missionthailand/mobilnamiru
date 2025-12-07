@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -28,8 +28,10 @@ const packages = [
         "Základní bezpečnostní audit",
         "Shrnutí a doporučení na závěr",
       ],
-      process: "Celá konzultace probíhá online přes sdílení obrazovky. Ty ovládáš telefon, já naviguju.",
-      ideal: "Ideální pro ty, kdo chtějí rychle začít a mají jasno v tom, co potřebují.",
+      process:
+        "Celá konzultace probíhá online přes sdílení obrazovky. Ty ovládáš telefon, já naviguju.",
+      ideal:
+        "Ideální pro ty, kdo chtějí rychle začít a mají jasno v tom, co potřebují.",
     },
   },
   {
@@ -58,8 +60,10 @@ const packages = [
         "Follow-up konzultace za 2 týdny (30 min)",
         "Email podpora po dobu 1 měsíce",
       ],
-      process: "Hloubková konzultace + follow-up, abychom zkontrolovali, jak ti nové nastavení funguje v praxi.",
-      ideal: "Pro ty, kdo chtějí komplexní přeměnu telefonu na nástroj produktivity.",
+      process:
+        "Hloubková konzultace + follow-up, abychom zkontrolovali, jak ti nové nastavení funguje v praxi.",
+      ideal:
+        "Pro ty, kdo chtějí komplexní přeměnu telefonu na nástroj produktivity.",
     },
   },
 ];
@@ -89,7 +93,8 @@ const PackagesSection = () => {
             Vyber si <span className="gradient-text">balíček</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Každý balíček zahrnuje osobní konzultaci a nastavení na míru. Klikni pro detaily.
+            Každý balíček zahrnuje osobní konzultaci a nastavení na míru. Klikni
+            pro detaily.
           </p>
         </div>
 
@@ -113,33 +118,46 @@ const PackagesSection = () => {
                   </div>
                 )}
 
-                <div 
+                <div
                   className="cursor-pointer"
                   onClick={() => togglePackage(pkg.name)}
                 >
                   <div className="mb-6">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-2xl font-bold text-foreground mb-1">{pkg.name}</h3>
-                      <ChevronDown 
+                      <h3 className="text-2xl font-bold text-foreground mb-1">
+                        {pkg.name}
+                      </h3>
+                      <ChevronDown
                         className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${
                           isExpanded ? "rotate-180" : ""
                         }`}
                       />
                     </div>
-                    <p className="text-muted-foreground text-sm">{pkg.tagline}</p>
+                    <p className="text-muted-foreground text-sm">
+                      {pkg.tagline}
+                    </p>
                   </div>
 
                   <div className="mb-6 pb-6 border-b border-border">
-                    <p className="text-sm text-secondary font-medium">{pkg.forWho}</p>
-                    <p className="text-3xl font-bold text-foreground mt-3">{pkg.price}</p>
+                    <p className="text-sm text-secondary font-medium">
+                      {pkg.forWho}
+                    </p>
+                    <p className="text-3xl font-bold text-foreground mt-3">
+                      {pkg.price}
+                    </p>
                     {pkg.format && (
-                      <span className="text-xs text-muted-foreground">{pkg.format}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {pkg.format}
+                      </span>
                     )}
                   </div>
 
                   <ul className="space-y-3 mb-4">
                     {pkg.results.map((result) => (
-                      <li key={result} className="flex items-start gap-3 text-sm">
+                      <li
+                        key={result}
+                        className="flex items-start gap-3 text-sm"
+                      >
                         <CheckIcon className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                         <span className="text-foreground">{result}</span>
                       </li>
@@ -161,10 +179,15 @@ const PackagesSection = () => {
 
                 {isExpanded && (
                   <div className="mt-4 pt-4 border-t border-border animate-fade-in">
-                    <h4 className="text-sm font-semibold text-foreground mb-3">Co přesně dostaneš:</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-3">
+                      Co přesně dostaneš:
+                    </h4>
                     <ul className="space-y-2 mb-4">
                       {pkg.details.included.map((item, index) => (
-                        <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <li
+                          key={index}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                        >
                           <CheckIcon className="w-3 h-3 text-primary flex-shrink-0 mt-1" />
                           {item}
                         </li>
@@ -173,7 +196,9 @@ const PackagesSection = () => {
 
                     <div className="glass rounded-xl p-4 mb-4">
                       <p className="text-sm text-muted-foreground">
-                        <span className="text-secondary font-semibold">Proces: </span>
+                        <span className="text-secondary font-semibold">
+                          Proces:{" "}
+                        </span>
                         {pkg.details.process}
                       </p>
                     </div>
@@ -201,7 +226,8 @@ const PackagesSection = () => {
         <div className="mt-12 text-center">
           <p className="text-muted-foreground text-sm inline-flex items-center gap-2 glass px-6 py-3 rounded-full">
             <CheckIcon className="w-4 h-4 text-success" />
-            Garance: Když ti to nepřinese jasné zlepšení, řekneme ti to narovinu.
+            Garance: Když ti to nepřinese jasné zlepšení, řekneme ti to
+            narovinu.
           </p>
         </div>
       </div>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -175,10 +175,14 @@ const ServicesGridSection = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-foreground">{service.title}</h3>
+                        <h3 className="font-semibold text-foreground">
+                          {service.title}
+                        </h3>
                         <ChevronDown className="w-4 h-4 text-muted-foreground rotate-180 transition-transform duration-300" />
                       </div>
-                      <p className="text-muted-foreground text-sm">{service.description}</p>
+                      <p className="text-muted-foreground text-sm">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
                 ) : (
@@ -186,8 +190,12 @@ const ServicesGridSection = () => {
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors mb-4">
                       <service.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="font-semibold text-foreground mb-2">{service.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-3">{service.description}</p>
+                    <h3 className="font-semibold text-foreground mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-3">
+                      {service.description}
+                    </p>
                     <ChevronDown className="w-4 h-4 text-muted-foreground animate-bounce" />
                   </div>
                 )}
@@ -195,10 +203,15 @@ const ServicesGridSection = () => {
                 {isExpanded && (
                   <div className="mt-6 pt-6 border-t border-border animate-fade-in">
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-3">Co nastavíme:</h4>
+                      <h4 className="text-sm font-semibold text-foreground mb-3">
+                        Co nastavíme:
+                      </h4>
                       <ul className="space-y-2">
                         {service.details.whatWeDo.map((item, index) => (
-                          <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <li
+                            key={index}
+                            className="flex items-start gap-2 text-sm text-muted-foreground"
+                          >
                             <span className="text-primary mt-1">•</span>
                             {item}
                           </li>
@@ -208,13 +221,18 @@ const ServicesGridSection = () => {
 
                     <div className="glass rounded-xl p-4 mb-4">
                       <p className="text-sm">
-                        <span className="text-secondary font-semibold">Výsledek: </span>
-                        <span className="text-foreground">{service.details.timeSaved}</span>
+                        <span className="text-secondary font-semibold">
+                          Výsledek:{" "}
+                        </span>
+                        <span className="text-foreground">
+                          {service.details.timeSaved}
+                        </span>
                       </p>
                     </div>
 
                     <div className="text-xs text-muted-foreground italic">
-                      <span className="text-primary">Příklad:</span> {service.details.example}
+                      <span className="text-primary">Příklad:</span>{" "}
+                      {service.details.example}
                     </div>
                   </div>
                 )}

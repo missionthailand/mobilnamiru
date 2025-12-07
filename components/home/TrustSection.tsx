@@ -3,11 +3,13 @@ import { CheckIcon, SecurityIcon } from "@/components/icons/Icons";
 const trustPoints = [
   {
     title: "Transparentní proces",
-    description: "Před konzultací víš přesně, co budeš platit a co dostaneš. Žádné skryté poplatky.",
+    description:
+      "Před konzultací víš přesně, co budeš platit a co dostaneš. Žádné skryté poplatky.",
   },
   {
     title: "Tvoje data zůstanou tvoje",
-    description: "Nepotřebujeme přístup k tvým účtům. Vše nastavujeme společně na tvém zařízení.",
+    description:
+      "Nepotřebujeme přístup k tvým účtům. Vše nastavujeme společně na tvém zařízení.",
   },
   {
     title: "Bezpečná komunikace",
@@ -15,7 +17,8 @@ const trustPoints = [
   },
   {
     title: "GDPR a ochrana soukromí",
-    description: "Zpracováváme jen nezbytné údaje. Kdykoliv můžeš požádat o jejich smazání.",
+    description:
+      "Zpracováváme jen nezbytné údaje. Kdykoliv můžeš požádat o jejich smazání.",
   },
 ];
 
@@ -44,13 +47,20 @@ const TrustSection = () => {
           {/* Trust Points */}
           <div className="space-y-6">
             {trustPoints.map((point) => (
-              <div key={point.title} className="glass rounded-xl p-5 flex gap-4">
+              <div
+                key={point.title}
+                className="glass rounded-xl p-5 flex gap-4"
+              >
                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                   <SecurityIcon className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-1">{point.title}</h3>
-                  <p className="text-muted-foreground text-sm">{point.description}</p>
+                  <h3 className="font-semibold text-foreground mb-1">
+                    {point.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {point.description}
+                  </p>
                 </div>
               </div>
             ))}

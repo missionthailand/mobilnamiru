@@ -25,21 +25,34 @@ const CTASection = () => {
 
           <div className="relative z-10">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Připraven/a na <span className="gradient-text">klidnější telefon</span>?
+              Připraven/a na{" "}
+              <span className="gradient-text">klidnější telefon</span>?
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
               Začni auditem zdarma. Za 5 minut budeš vědět, co se dá zlepšit.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <Link href="/audit" onClick={() => handleCtaClick("audit_bottom")}>
-                <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-secondary to-secondary/80 text-background hover:from-secondary/90 hover:to-secondary/70 shadow-lg shadow-secondary/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary/30">
+              <Link
+                href="/audit"
+                onClick={() => handleCtaClick("audit_bottom")}
+              >
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-gradient-to-r from-secondary to-secondary/80 text-background hover:from-secondary/90 hover:to-secondary/70 shadow-lg shadow-secondary/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary/30"
+                >
                   Chci mobil na míru
                   <ArrowRightIcon />
                 </Button>
               </Link>
-              <a href="#balicky" onClick={() => handleCtaClick("booking_bottom")}>
-                <Button size="lg" className="w-full sm:w-auto bg-card border border-border text-foreground hover:border-primary/50 hover:bg-card/80">
+              <a
+                href="#balicky"
+                onClick={() => handleCtaClick("booking_bottom")}
+              >
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-card border border-border text-foreground hover:border-primary/50 hover:bg-card/80"
+                >
                   Prohlédnout balíčky
                 </Button>
               </a>

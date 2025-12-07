@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { ChevronDown, Clock, CheckCircle2, Euro, Zap } from "lucide-react";
@@ -8,7 +8,8 @@ const steps = [
   {
     number: "01",
     title: "Vyplníš audit",
-    description: "5 minut dotazník o tom, jak telefon používáš, co tě ruší a co bys chtěl/a zlepšit.",
+    description:
+      "5 minut dotazník o tom, jak telefon používáš, co tě ruší a co bys chtěl/a zlepšit.",
     accent: "primary",
     details: {
       duration: "5 minut",
@@ -19,13 +20,15 @@ const steps = [
         "Dotazník funguje na počítači i mobilu",
         "Odpovědi jsou důvěrné a bezpečně uložené",
       ],
-      outcome: "Na základě odpovědí připravíme personalizovaný mini-report s 3 rychlými tipy.",
+      outcome:
+        "Na základě odpovědí připravíme personalizovaný mini-report s 3 rychlými tipy.",
     },
   },
   {
     number: "02",
     title: "Dostaneš report",
-    description: "Na mail ti přijde konkrétní checklist s návrhy změn a vysvětlením, proč dávají smysl.",
+    description:
+      "Na mail ti přijde konkrétní checklist s návrhy změn a vysvětlením, proč dávají smysl.",
     accent: "secondary",
     details: {
       duration: "Do 24 hodin",
@@ -42,7 +45,8 @@ const steps = [
   {
     number: "03",
     title: "Nastavíme to společně",
-    description: "Během online hovoru projdeme telefon a vše nastavíme. Ty se díváš, ptáš a učíš se.",
+    description:
+      "Během online hovoru projdeme telefon a vše nastavíme. Ty se díváš, ptáš a učíš se.",
     accent: "success",
     details: {
       duration: "60-90 minut",
@@ -54,7 +58,8 @@ const steps = [
         "Vysvětlím každý krok, abys pochopil/a proč",
         "Prostor pro tvé otázky a přání",
       ],
-      outcome: "Telefon nastavený přesně podle tvých potřeb + know-how jak to udržet.",
+      outcome:
+        "Telefon nastavený přesně podle tvých potřeb + know-how jak to udržet.",
     },
   },
 ];
@@ -74,7 +79,8 @@ const HowItWorksSection = () => {
             Jak to <span className="gradient-text">funguje</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Tři jednoduché kroky k telefonu, který ti slouží místo toho, aby tě rušil.
+            Tři jednoduché kroky k telefonu, který ti slouží místo toho, aby tě
+            rušil.
           </p>
           <p className="text-sm text-muted-foreground/70 mt-2">
             Klikni na kartu pro detaily a transparentní ceny
@@ -84,7 +90,7 @@ const HowItWorksSection = () => {
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {steps.map((step, index) => {
             const isExpanded = expandedStep === step.number;
-            
+
             return (
               <div
                 key={step.number}
@@ -101,7 +107,8 @@ const HowItWorksSection = () => {
                   className={cn(
                     "glass rounded-2xl p-6 md:p-8 relative z-10 transition-all duration-300 cursor-pointer",
                     "hover:border-primary/30",
-                    isExpanded && "border-primary/50 shadow-lg shadow-primary/10"
+                    isExpanded &&
+                      "border-primary/50 shadow-lg shadow-primary/10",
                   )}
                 >
                   {/* Number */}
@@ -109,11 +116,14 @@ const HowItWorksSection = () => {
                     className={cn(
                       "inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6",
                       step.accent === "primary" && "bg-primary/20 text-primary",
-                      step.accent === "secondary" && "bg-secondary/20 text-secondary",
-                      step.accent === "success" && "bg-success/20 text-success"
+                      step.accent === "secondary" &&
+                        "bg-secondary/20 text-secondary",
+                      step.accent === "success" && "bg-success/20 text-success",
                     )}
                   >
-                    <span className="font-bold text-lg text-primary">{step.number}</span>
+                    <span className="font-bold text-lg text-primary">
+                      {step.number}
+                    </span>
                   </div>
 
                   <h3 className="text-xl font-semibold text-foreground mb-3">
@@ -126,7 +136,7 @@ const HowItWorksSection = () => {
                     <ChevronDown
                       className={cn(
                         "w-5 h-5 text-muted-foreground transition-transform duration-300",
-                        isExpanded && "rotate-180"
+                        isExpanded && "rotate-180",
                       )}
                     />
                   </div>
@@ -135,7 +145,9 @@ const HowItWorksSection = () => {
                   <div
                     className={cn(
                       "overflow-hidden transition-all duration-500",
-                      isExpanded ? "max-h-[600px] opacity-100 mt-6" : "max-h-0 opacity-0"
+                      isExpanded
+                        ? "max-h-[600px] opacity-100 mt-6"
+                        : "max-h-0 opacity-0",
                     )}
                   >
                     <div className="border-t border-border/50 pt-6 space-y-4">

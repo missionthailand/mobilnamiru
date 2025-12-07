@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "mobilnamiru.cz – Nastavení telefonu na míru | Klid, čas, bezpečí.",
-  description: "Vylaďujeme iPhone na míru: notifikace, Focus režimy, bezpečnost, zálohy, workflow. Získej zpět klid a čas. Audit zdarma.",
-  authors: [{url: "mobilnamiru.cz"}],
+  description:
+    "Vylaďujeme iPhone na míru: notifikace, Focus režimy, bezpečnost, zálohy, workflow. Získej zpět klid a čas. Audit zdarma.",
+  authors: [{ url: "mobilnamiru.cz" }],
 };
 
 export default function RootLayout({
@@ -25,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

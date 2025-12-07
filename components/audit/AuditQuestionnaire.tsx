@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRightIcon, CheckIcon } from '@/components/icons/Icons';
-import { useToast } from '@/hooks/use-toast';
-import QuestionCard from './QuestionCard';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRightIcon, CheckIcon } from "@/components/icons/Icons";
+import { useToast } from "@/hooks/use-toast";
+import QuestionCard from "./QuestionCard";
 import {
   questionnaireSections,
   branchingSections,
   getApplicableBranches,
   Question,
-} from './QuestionnaireData';
-import {useRouter} from "next/navigation";
+} from "./QuestionnaireData";
+import { useRouter } from "next/navigation";
 
 interface AuditQuestionnaireProps {
   onComplete: (submissionId: string) => void;
@@ -21,17 +21,18 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isEmailStep, setIsEmailStep] = useState(false);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [nameError, setNameError] = useState('');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
   const [consentReport, setConsentReport] = useState(false);
   const [consentMarketing, setConsentMarketing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBranching, setShowBranching] = useState(false);
   const [currentBranchIndex, setCurrentBranchIndex] = useState(0);
-  const [currentBranchQuestionIndex, setCurrentBranchQuestionIndex] = useState(0);
-  
+  const [currentBranchQuestionIndex, setCurrentBranchQuestionIndex] =
+    useState(0);
+
   const router = useRouter();
   const { toast } = useToast();
 
@@ -46,52 +47,75 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
   const currentSection = showBranching
     ? getApplicableBranches(answers)[currentBranchIndex]
     : questionnaireSections[currentSectionIndex];
-  
+
   const currentQuestion = showBranching
-    ? getApplicableBranches(answers)[currentBranchIndex]?.questions[currentBranchQuestionIndex]
-    : questionnaireSections[currentSectionIndex]?.questions[currentQuestionIndex];
+    ? getApplicableBranches(answers)[currentBranchIndex]?.questions[
+        currentBranchQuestionIndex
+      ]
+    : questionnaireSections[currentSectionIndex]?.questions[
+        currentQuestionIndex
+      ];
 
   // Calculate progress
   const calculateProgress = () => {
-    const mainQuestions = questionnaireSections.reduce((acc, s) => acc + s.questions.length, 0);
-    const branchQuestions = getApplicableBranches(answers).reduce((acc, s) => acc + s.questions.length, 0);
+    const mainQuestions = questionnaireSections.reduce(
+      (acc, s) => acc + s.questions.length,
+      0,
+    );
+    const branchQuestions = getApplicableBranches(answers).reduce(
+      (acc, s) => acc + s.questions.length,
+      0,
+    );
     const totalQuestions = mainQuestions + branchQuestions;
-    
+
     let answeredCount = 0;
-    questionnaireSections.forEach(section => {
-      section.questions.forEach(q => {
-        if (answers[q.id] !== undefined && answers[q.id] !== '' && 
-            (Array.isArray(answers[q.id]) ? answers[q.id].length > 0 : true)) {
+    questionnaireSections.forEach((section) => {
+      section.questions.forEach((q) => {
+        if (
+          answers[q.id] !== undefined &&
+          answers[q.id] !== "" &&
+          (Array.isArray(answers[q.id]) ? answers[q.id].length > 0 : true)
+        ) {
           answeredCount++;
         }
       });
     });
-    
-    getApplicableBranches(answers).forEach(section => {
-      section.questions.forEach(q => {
-        if (answers[q.id] !== undefined && answers[q.id] !== '' &&
-            (Array.isArray(answers[q.id]) ? answers[q.id].length > 0 : true)) {
+
+    getApplicableBranches(answers).forEach((section) => {
+      section.questions.forEach((q) => {
+        if (
+          answers[q.id] !== undefined &&
+          answers[q.id] !== "" &&
+          (Array.isArray(answers[q.id]) ? answers[q.id].length > 0 : true)
+        ) {
           answeredCount++;
         }
       });
     });
-    
+
     if (isEmailStep) return 100;
     return Math.round((answeredCount / totalQuestions) * 95);
   };
 
   const handleAnswer = (value: any) => {
     if (!currentQuestion) return;
-    setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
-    setErrors(prev => ({ ...prev, [currentQuestion.id]: '' }));
+    setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
+    setErrors((prev) => ({ ...prev, [currentQuestion.id]: "" }));
   };
 
   const validateCurrentQuestion = (): boolean => {
     if (!currentQuestion) return true;
     if (currentQuestion.required) {
       const value = answers[currentQuestion.id];
-      if (value === undefined || value === '' || (Array.isArray(value) && value.length === 0)) {
-        setErrors(prev => ({ ...prev, [currentQuestion.id]: 'Tato otázka je povinná' }));
+      if (
+        value === undefined ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+      ) {
+        setErrors((prev) => ({
+          ...prev,
+          [currentQuestion.id]: "Tato otázka je povinná",
+        }));
         return false;
       }
     }
@@ -104,22 +128,22 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
     if (showBranching) {
       const branches = getApplicableBranches(answers);
       const currentBranch = branches[currentBranchIndex];
-      
+
       if (currentBranchQuestionIndex < currentBranch.questions.length - 1) {
-        setCurrentBranchQuestionIndex(prev => prev + 1);
+        setCurrentBranchQuestionIndex((prev) => prev + 1);
       } else if (currentBranchIndex < branches.length - 1) {
-        setCurrentBranchIndex(prev => prev + 1);
+        setCurrentBranchIndex((prev) => prev + 1);
         setCurrentBranchQuestionIndex(0);
       } else {
         setIsEmailStep(true);
       }
     } else {
       const currentSect = questionnaireSections[currentSectionIndex];
-      
+
       if (currentQuestionIndex < currentSect.questions.length - 1) {
-        setCurrentQuestionIndex(prev => prev + 1);
+        setCurrentQuestionIndex((prev) => prev + 1);
       } else if (currentSectionIndex < questionnaireSections.length - 1) {
-        setCurrentSectionIndex(prev => prev + 1);
+        setCurrentSectionIndex((prev) => prev + 1);
         setCurrentQuestionIndex(0);
       } else {
         // Check if there are branching questions
@@ -142,33 +166,45 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
         setIsEmailStep(false);
         setShowBranching(true);
         setCurrentBranchIndex(branches.length - 1);
-        setCurrentBranchQuestionIndex(branches[branches.length - 1].questions.length - 1);
+        setCurrentBranchQuestionIndex(
+          branches[branches.length - 1].questions.length - 1,
+        );
       } else {
         setIsEmailStep(false);
         setCurrentSectionIndex(questionnaireSections.length - 1);
-        setCurrentQuestionIndex(questionnaireSections[questionnaireSections.length - 1].questions.length - 1);
+        setCurrentQuestionIndex(
+          questionnaireSections[questionnaireSections.length - 1].questions
+            .length - 1,
+        );
       }
       return;
     }
 
     if (showBranching) {
       if (currentBranchQuestionIndex > 0) {
-        setCurrentBranchQuestionIndex(prev => prev - 1);
+        setCurrentBranchQuestionIndex((prev) => prev - 1);
       } else if (currentBranchIndex > 0) {
         const branches = getApplicableBranches(answers);
-        setCurrentBranchIndex(prev => prev - 1);
-        setCurrentBranchQuestionIndex(branches[currentBranchIndex - 1].questions.length - 1);
+        setCurrentBranchIndex((prev) => prev - 1);
+        setCurrentBranchQuestionIndex(
+          branches[currentBranchIndex - 1].questions.length - 1,
+        );
       } else {
         setShowBranching(false);
         setCurrentSectionIndex(questionnaireSections.length - 1);
-        setCurrentQuestionIndex(questionnaireSections[questionnaireSections.length - 1].questions.length - 1);
+        setCurrentQuestionIndex(
+          questionnaireSections[questionnaireSections.length - 1].questions
+            .length - 1,
+        );
       }
     } else {
       if (currentQuestionIndex > 0) {
-        setCurrentQuestionIndex(prev => prev - 1);
+        setCurrentQuestionIndex((prev) => prev - 1);
       } else if (currentSectionIndex > 0) {
-        setCurrentSectionIndex(prev => prev - 1);
-        setCurrentQuestionIndex(questionnaireSections[currentSectionIndex - 1].questions.length - 1);
+        setCurrentSectionIndex((prev) => prev - 1);
+        setCurrentQuestionIndex(
+          questionnaireSections[currentSectionIndex - 1].questions.length - 1,
+        );
       }
     }
   };
@@ -180,27 +216,27 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     let hasError = false;
-    
+
     if (!name.trim()) {
-      setNameError('Jméno je povinné');
+      setNameError("Jméno je povinné");
       hasError = true;
     }
-    
+
     if (!email) {
-      setEmailError('Email je povinný');
+      setEmailError("Email je povinný");
       hasError = true;
     } else if (!validateEmail(email)) {
-      setEmailError('Zadej platnou emailovou adresu');
+      setEmailError("Zadej platnou emailovou adresu");
       hasError = true;
     }
 
     if (!consentReport) {
-      setEmailError('Pro odeslání reportu potřebujeme tvůj souhlas');
+      setEmailError("Pro odeslání reportu potřebujeme tvůj souhlas");
       hasError = true;
     }
-    
+
     if (hasError) return;
 
     setIsSubmitting(true);
@@ -211,7 +247,7 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
         name: name.trim(),
         email,
         marketing_consent: consentMarketing,
-        system_type: answers.system_type || '',
+        system_type: answers.system_type || "",
         device_model: answers.device_model || null,
         other_devices: answers.other_devices || [],
         primary_accounts: answers.primary_accounts || [],
@@ -266,31 +302,31 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
       // if (error) throw error;
 
       // Track event
-      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      if (typeof window !== "undefined" && (window as any).dataLayer) {
         (window as any).dataLayer.push({
-          event: 'audit_complete',
+          event: "audit_complete",
           consent_marketing: consentMarketing,
         });
       }
 
       // Save to localStorage for thank you page
-      localStorage.setItem('audit_done', 'true');
+      localStorage.setItem("audit_done", "true");
       // localStorage.setItem('audit_submission_id', data.id);
-      localStorage.setItem('audit_email', email);
-      localStorage.setItem('audit_name', name.trim());
+      localStorage.setItem("audit_email", email);
+      localStorage.setItem("audit_name", name.trim());
 
       toast({
-        title: 'Odesláno!',
-        description: 'Tvůj audit byl úspěšně odeslán. Generujeme report...',
+        title: "Odesláno!",
+        description: "Tvůj audit byl úspěšně odeslán. Generujeme report...",
       });
 
       // onComplete(data.id);
     } catch (error) {
-      console.error('Error submitting audit:', error);
+      console.error("Error submitting audit:", error);
       toast({
-        title: 'Chyba',
-        description: 'Nepodařilo se odeslat audit. Zkus to prosím znovu.',
-        variant: 'destructive',
+        title: "Chyba",
+        description: "Nepodařilo se odeslat audit. Zkus to prosím znovu.",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -316,7 +352,10 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-foreground mb-2"
+            >
               Jméno
             </label>
             <input
@@ -325,7 +364,7 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
-                setNameError('');
+                setNameError("");
               }}
               className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="Jak ti máme říkat?"
@@ -339,7 +378,10 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-foreground mb-2"
+            >
               Email
             </label>
             <input
@@ -348,7 +390,7 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setEmailError('');
+                setEmailError("");
               }}
               className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="tvuj@email.cz"
@@ -367,7 +409,8 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
                 className="mt-1 w-5 h-5 rounded border-border bg-background text-primary focus:ring-primary"
               />
               <span className="text-sm text-foreground">
-                Chci poslat výsledky reportu na email <span className="text-destructive">*</span>
+                Chci poslat výsledky reportu na email{" "}
+                <span className="text-destructive">*</span>
               </span>
             </label>
 
@@ -398,13 +441,13 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
               disabled={isSubmitting}
               className="flex-1 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/20"
             >
-              {isSubmitting ? 'Odesílám...' : 'Odeslat a získat report'}
+              {isSubmitting ? "Odesílám..." : "Odeslat a získat report"}
               <ArrowRightIcon />
             </Button>
           </div>
 
           <p className="text-xs text-muted-foreground text-center">
-            Odesláním souhlasíš se{' '}
+            Odesláním souhlasíš se{" "}
             <a href="/privacy" className="text-primary hover:underline">
               zásadami ochrany soukromí
             </a>
@@ -431,23 +474,25 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
         </div>
         <div className="flex justify-between items-center mt-2">
           <span className="text-sm text-muted-foreground">
-            {showBranching ? 'Doplňující otázky' : currentSection.title}
+            {showBranching ? "Doplňující otázky" : currentSection.title}
           </span>
-          <span className="text-sm text-muted-foreground">
-            {progress}%
-          </span>
+          <span className="text-sm text-muted-foreground">{progress}%</span>
         </div>
       </div>
 
       {/* Section info */}
       <div className="mb-6">
         <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium mb-2">
-          {showBranching ? getApplicableBranches(answers)[currentBranchIndex]?.title : currentSection.title}
+          {showBranching
+            ? getApplicableBranches(answers)[currentBranchIndex]?.title
+            : currentSection.title}
         </span>
         <p className="text-sm text-muted-foreground">
           {showBranching
-            ? 'Na základě tvých odpovědí máme pár doplňujících otázek'
-            : 'description' in currentSection ? currentSection.description : ''}
+            ? "Na základě tvých odpovědí máme pár doplňujících otázek"
+            : "description" in currentSection
+              ? currentSection.description
+              : ""}
         </p>
       </div>
 
@@ -465,7 +510,11 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
       <div className="flex justify-between items-center">
         <button
           onClick={goToPrevious}
-          disabled={currentSectionIndex === 0 && currentQuestionIndex === 0 && !showBranching}
+          disabled={
+            currentSectionIndex === 0 &&
+            currentQuestionIndex === 0 &&
+            !showBranching
+          }
           className="text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           ← Zpět
