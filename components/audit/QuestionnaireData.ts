@@ -366,7 +366,7 @@ export const questionnaireSections: QuestionSection[] = [
         id: "two_factor_auth",
         question: "2FA: kde ho máš zapnuté?",
         why: "Dvoufaktorové ověření je nejlepší ochrana proti prolomení účtu.",
-        type: "single",
+        type: "multi",
         options: [
           { value: "email", label: "E-mail" },
           { value: "social", label: "Sociální sítě" },
