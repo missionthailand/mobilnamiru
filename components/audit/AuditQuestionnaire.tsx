@@ -4,12 +4,11 @@ import { ArrowRightIcon, CheckIcon } from "@/components/icons/Icons";
 import { useToast } from "@/hooks/use-toast";
 import QuestionCard from "./QuestionCard";
 import {
-  questionnaireSections,
-  branchingSections,
   getApplicableBranches,
-  Question,
+  questionnaireSections,
 } from "./QuestionnaireData";
 import { useRouter } from "next/navigation";
+import supabase from "@/supabase/client";
 
 interface AuditQuestionnaireProps {
   onComplete: (submissionId: string) => void;
@@ -293,13 +292,13 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
       };
 
       // Insert to database
-      //const { data, error } = await supabase
-      //  .from('audit_submissions')
-      //  .insert(submissionData)
-      //  .select('id')
-      //  .single();
+      const { data, error } = await supabase
+        .from("audit_submissions")
+        .insert(submissionData)
+        .select("id")
+        .single();
 
-      // if (error) throw error;
+      if (error) throw error;
 
       // Track event
       if (typeof window !== "undefined" && (window as any).dataLayer) {
@@ -311,7 +310,7 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
 
       // Save to localStorage for thank you page
       localStorage.setItem("audit_done", "true");
-      // localStorage.setItem('audit_submission_id', data.id);
+      localStorage.setItem("audit_submission_id", data.id);
       localStorage.setItem("audit_email", email);
       localStorage.setItem("audit_name", name.trim());
 
@@ -320,7 +319,7 @@ const AuditQuestionnaire = ({ onComplete }: AuditQuestionnaireProps) => {
         description: "Tvůj audit byl úspěšně odeslán. Generujeme report...",
       });
 
-      // onComplete(data.id);
+      onComplete(data.id);
     } catch (error) {
       console.error("Error submitting audit:", error);
       toast({

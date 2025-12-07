@@ -4,20 +4,21 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { CheckIcon, ArrowRightIcon } from "@/components/icons/Icons";
+import { ArrowRightIcon, CheckIcon } from "@/components/icons/Icons";
 import {
-  Download,
-  Share2,
-  Loader2,
-  FileText,
   Crown,
-  Video,
+  Download,
+  FileText,
+  Loader2,
+  Share2,
   Sparkles,
+  Video,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
 import Link from "next/link";
+import supabase from "@/supabase/client";
 
 const quickWins = [
   {
@@ -71,16 +72,16 @@ export default function ThankYou() {
   const fetchReport = async (submissionId: string) => {
     try {
       // Use secure edge function to fetch report (RLS blocks direct access)
-      // const { data, error } = await supabase.functions.invoke('get-report', {
-      //   body: { submissionId }
-      // });
-      // if (error) {
-      //   console.error("Error fetching report:", error);
-      //   return;
-      // }
-      // if (data?.report) {
-      //   setReport(data.report);
-      // }
+      const { data, error } = await supabase.functions.invoke("get-report", {
+        body: { submissionId },
+      });
+      if (error) {
+        console.error("Error fetching report:", error);
+        return;
+      }
+      if (data?.report) {
+        setReport(data.report);
+      }
     } catch (error) {
       console.error("Error:", error);
     } finally {

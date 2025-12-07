@@ -9,6 +9,7 @@ import AuditQuestionnaire from "@/components/audit/AuditQuestionnaire";
 import { useToast } from "@/hooks/use-toast";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
+import supabase from "@/supabase/client";
 
 export default function Audit() {
   const [isStarted, setIsStarted] = useState(false);
@@ -30,22 +31,25 @@ export default function Audit() {
 
     try {
       // Generate AI report
-      // const { data, error } = await supabase.functions.invoke('generate-report', {
-      //   body: { submissionId }
-      // });
+      const { data, error } = await supabase.functions.invoke(
+        "generate-report",
+        {
+          body: { submissionId },
+        },
+      );
 
-      // if (error) {
-      //   console.error('Error generating report:', error);
-      //   toast({
-      //     title: 'Report se generuje',
-      //     description: 'Pošleme ti ho na email.',
-      //   });
-      // }
+      if (error) {
+        console.error("Error generating report:", error);
+        toast({
+          title: "Report se generuje",
+          description: "Pošleme ti ho na email.",
+        });
+      }
 
-      await router.push("/thankyou");
+      router.push("/thankyou");
     } catch (error) {
       console.error("Error:", error);
-      await router.push("/thankyou");
+      router.push("/thankyou");
     }
   };
 
